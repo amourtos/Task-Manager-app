@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { loginRequest } from "../fetch/fetch";
 import { useStore, LOGIN } from "../store/store";
 
@@ -43,7 +44,7 @@ function Login(props) {
         <label htmlFor="password">Password-</label>
         <input type="password" name="password" value={formData.password} required onChange={handleChange} />
         <button id="LoginButton" type="submit">
-          Login
+          <Link to="/main">Login</Link>
         </button>
         <div>{user.message ? user.message : ""}</div>
       </form>
