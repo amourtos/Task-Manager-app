@@ -1,4 +1,4 @@
-export const baseURL = "http://localhost3000";
+export const baseURL = "http://localhost:3000";
 
 export const loginRequest = (email, password) => {
   return fetch(baseURL + "/users/login", {
@@ -9,6 +9,21 @@ export const loginRequest = (email, password) => {
       password,
     }),
   }).then((res) => res.json());
+};
+
+export const createUser = async (username, email, password) => {
+  const res = await fetch(baseURL + "/users/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username,
+      email,
+      password,
+    }),
+  });
+  if (!res.ok) {
+    throw new Error("bad response", res);
+  }
 };
 
 export const getUsers = () => {
@@ -74,7 +89,7 @@ export const toggleComplete = (token, id, title, details, dueDate) => {
   }).then((res) => res.json());
 };
 
-export const patchTodoInfo = (token, id) => {
+export const patchTodoInfo = (token, id, title, details, dueDate) => {
   return fetch(baseURL + "/tasks/update/task/:id", {
     method: "PATCH",
     headers: {

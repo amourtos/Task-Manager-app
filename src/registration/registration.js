@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
-import { REGISTER } from "../store/store";
 import { useStore } from "../store/store";
+import { createUser } from "../fetch/fetch";
+import Popup from "./Popup";
 
 function Registration(props) {
-  const dispatch = useStore((state) => state.dispatch);
+  const [buttonPopup, setButtonPopup] = useState(false);
   const [userData, setUserData] = useState({
     username: "",
+    email: "",
     password: "",
   });
 
-  // const handleRegister = (e) => {
-  //  e.preventDefault();
-  //  registerRequest(userData).then((userData) =>
-  //    dispatch({ type: REGISTER, payload: userData })
-  //  );
-  //  };
+  const handleSubmit = () => {
+    createUser(userData.username, userData.email, userData.password)
+      .then(() => setButtonPopup(true))
+      .catch(() => {
+        alert("Username or email may already be taken. Try again.");
+        <Popup>
+          <h3>Please try again</h3>
+        </Popup>;
+      });
+  };
 
   const handleChange = (e) => {
     const inputName = e.target.name;
@@ -25,16 +31,15 @@ function Registration(props) {
 
   return (
     <div className="RegisterForm">
-      <Form className="RegisterForm">
+      <Form className="RegisterForm" onSubmit={(e) => e.preventDefault()} onFinish={handleSubmit}>
         <Form.Item
           label="Username"
           rules={[
             {
               required: true,
             },
-          ]}
-        >
-          <Input name={"username"} onChange={(event) => handleChange(event)} />
+          ]}>
+          <Input name={"username"} value={userData.username} onChange={handleChange} />
         </Form.Item>
         <Form.Item
           label="Email"
@@ -42,18 +47,11 @@ function Registration(props) {
             {
               type: "email",
             },
-          ]}
-        >
-          <Input name={"email"} />
+          ]}>
+          <Input name={"email"} value={userData.email} onChange={handleChange} />
         </Form.Item>
-        <Form.Item
-          label="Password"
-          rules={[{ required: true, message: "Please input your password!" }]}
-        >
-          <Input.Password
-            name={"password"}
-            onChange={(event) => handleChange(event)}
-          />
+        <Form.Item label="Password" rules={[{ required: true, message: "Please input your password!" }]}>
+          <Input.Password name={"password"} value={userData.password} onChange={handleChange} />
         </Form.Item>
         <Form.Item>
           <Button id="SubmitButton" type="primary" htmlType="submit">
@@ -61,7 +59,7 @@ function Registration(props) {
           </Button>
         </Form.Item>
       </Form>
-      <Button />
+      <Popup trigger={buttonPopup} setTrigger={setButtonPopup} />
     </div>
   );
 }

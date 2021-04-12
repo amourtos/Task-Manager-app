@@ -21,53 +21,53 @@ const reducer = (state, action) => {
       return {};
     case LOGOUT:
       return { user: {} };
-    case UPDATE_INPUT:
-      return {
-        ...state,
-        newInput: action.payload,
-      };
-    case ADD_TODO:
-      return {
-        ...state,
-        todos: action.payload,
-      };
-    case TOGGLE_COMPLETE:
-      return {
-        ...state,
-        todos: state.todos.map((todo) => {
-          let newTodo = { ...todo };
-          if (newTodo.id === action.payload) {
-            newTodo.completed = !newTodo.completed;
-          }
-          return newTodo;
-        }),
-      };
-    case DELETE_TODO:
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => {
-          if (todo.id === action.payload) {
-            return false;
-          } else {
-            return true;
-          }
-        }),
-      };
-    case CLEAR_COMPLETE:
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => {
-          if (todo.completed === true) {
-            return false;
-          } else {
-            return true;
-          }
-        }),
-      };
+    // case UPDATE_INPUT:
+    //   return {
+    //     ...state,
+    //     newInput: action.payload,
+    //   };
+    // case ADD_TODO:
+    //   return {
+    //     ...state,
+    //     todos: action.payload,
+    //   };
+    // case TOGGLE_COMPLETE:
+    //   return {
+    //     ...state,
+    //     todos: state.todos.map((todo) => {
+    //       let newTodo = { ...todo };
+    //       if (newTodo.id === action.payload) {
+    //         newTodo.completed = !newTodo.completed;
+    //       }
+    //       return newTodo;
+    //     }),
+    //   };
+    // case DELETE_TODO:
+    //   return {
+    //     ...state,
+    //     todos: state.todos.filter((todo) => {
+    //       if (todo.id === action.payload) {
+    //         return false;
+    //       } else {
+    //         return true;
+    //       }
+    //     }),
+    //   };
+    // case CLEAR_COMPLETE:
+    //   return {
+    //     ...state,
+    //     todos: state.todos.filter((todo) => {
+    //       if (todo.completed === true) {
+    //         return false;
+    //       } else {
+    //         return true;
+    //       }
+    //     }),
+    //   };
 
     default:
       return state;
   }
 };
 
-export const useStore = create(devtools(redux(reducer, initialState)));
+export const useStore = create(devtools(redux(reducer, initialState)), { name: "storage" });
