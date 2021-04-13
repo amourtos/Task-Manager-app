@@ -26,6 +26,16 @@ export const createUser = async (username, email, password) => {
   }
 };
 
+export const getTodo = (token, todoId) => {
+  return fetch(baseURL + `/tasks/${todoId}`, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json());
+};
+
 export const getUsers = () => {
   return fetch(baseURL + "/users/allusers").then((res) => res.json());
 };

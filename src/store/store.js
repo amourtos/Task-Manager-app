@@ -2,7 +2,7 @@ import create from "zustand";
 import { devtools, redux } from "zustand/middleware";
 import todoList from "../todo.json";
 
-const initialState = { user: { token: "" }, todos: todoList };
+const initialState = { user: { token: "" }, todoList: [] };
 
 export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
@@ -12,6 +12,7 @@ export const DELETE_TODO = "DELETE_TODO";
 export const UPDATE_INPUT = "UPDATE_INPUT";
 export const ADD_TODO = "ADD_TODO";
 export const CLEAR_COMPLETE = "CLEAR_COMPLETE";
+export const GET_TODOLIST = "GET_TODOLIST";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -21,6 +22,8 @@ const reducer = (state, action) => {
       return {};
     case LOGOUT:
       return { user: {} };
+    case GET_TODOLIST:
+      return { ...state, todos: action.payload };
     // case UPDATE_INPUT:
     //   return {
     //     ...state,
