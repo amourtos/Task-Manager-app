@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useStore, LOGIN } from "../store/store";
+import React, { useState, useStore } from "react";
+import { LOGIN } from "../store/store";
 
 function Login(props) {
   const dispatch = useStore((state) => state.dispatch);

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useStore } from "react";
 import { Form, Input, Button } from "antd";
 import { REGISTER } from "../store/store";
-import { useStore } from "../store/store";
 
 function Registration(props) {
   const dispatch = useStore((state) => state.dispatch);

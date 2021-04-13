@@ -1,34 +1,31 @@
-import { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { useEffect, useReducer, useState, createContext } from "react";
+import { Route } from "react-router-dom";
 import TodoList from "../todoList/todoList";
 import todosList from "../todo.json";
+import reducer from "../store/store.js";
+
 import {
   useStore,
-  TOGGLE_COMPLETE,
-  DELETE_TODO,
   UPDATE_INPUT,
   ADD_TODO,
   CLEAR_COMPLETE,
 } from "../store/store";
 
-function CreateTodo() {
-  const dispatch = useStore((state) => state.dispatch);
+export const TodosContext = createContext(null);
 
-  const [newInput, setNewInput] = useState("");
-  const [todos, setTodos] = useState([]);
+function CreateTodo() {
+  const [state, dispatch] = useReducer(reducer, {
+    todos: todosList,
+    newInput: "",
+  });
 
   function handleChange(event) {
-    let inputTitle = event.target.title;
-    let inputValue = event.target.value;
-    setNewInput((state) => ({ ...state, [inputTitle]: inputValue }));
-    setNewInput(event.target.value);
     dispatch({ type: UPDATE_INPUT, payload: event.target.value });
   }
 
   function handleKeyDown(event) {
     if (event.key === "Enter") {
-      setTodos(newInput);
-      dispatch({ type: ADD_TODO, payload: todos });
+      dispatch({ type: ADD_TODO, payload: state.newInput });
     }
   }
 
@@ -37,60 +34,55 @@ function CreateTodo() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
-
-  function clearComplete(event) {
-    dispatch({ type: CLEAR_COMPLETE });
-  }
+  });
 
   return (
     <>
-      <Switch>
+      <TodosContext.Provider value={dispatch}>
         <Route exact path="/main">
           <section className="todoapp">
             <header className="header">
               <h1>todos</h1>
-              <form onSubmit={handleKeyDown}>
-                <input
-                  type="text"
-                  value={newInput}
-                  className="new-todo"
-                  placeholder="What needs to be done?"
-                  autoFocus
-                  onChange={(event) => handleChange(event)}
-                />
-                <button value="submit">Submit</button>
-              </form>
+
+              <input
+                type="text"
+                value={state.newInput}
+                className="new-todo"
+                placeholder="What needs to be done?"
+                autoFocus
+                onChange={(event) => handleChange(event)}
+              />
+              <button value="submit">Submit</button>
             </header>
-            <TodoList todos={todos} />
+            <TodoList todos={state.todos} />
             {/* <Footer
-                clearComplete={clearComplete}
-                itemsLeft={
-                  state.todos.filter((todo) => {
-                    if (todo.completed === true) {
-                      return false;
-                    } else {
-                      return true;
-                    }
-                  }).length
-                }
-              /> */}
+              clearComplete={clearComplete}
+              itemsLeft={
+                state.todos.filter((todo) => {
+                  if (todo.completed === true) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                }).length
+              }
+            /> */}
           </section>
         </Route>
-        <Route exact path="/active">
+        {/* <Route exact path="/active">
           <section className="todoapp">
             <header className="header">
               <h1>todos</h1>
               <input
                 type="text"
-                value={newInput}
+                value={state.newInput}
                 className="new-todo"
                 placeholder="What needs to be done?"
                 autoFocus
                 onChange={(event) => handleChange(event)}
               />
             </header>
-            {/* <TodoList
+            <TodoList
               todos={todos.filter((todo) => {
                 if (todo.completed === true) {
                   return false;
@@ -99,34 +91,34 @@ function CreateTodo() {
                 }
               })}
             /> */}
-            {/* <Footer
-                clearComplete={clearComplete}
-                itemsLeft={
-                  state.todos.filter((todo) => {
-                    if (todo.completed === true) {
-                      return false;
-                    } else {
-                      return true;
-                    }
-                  }).length
-                }
-              /> */}
+        {/* <Footer
+              clearComplete={clearComplete}
+              itemsLeft={
+                state.todos.filter((todo) => {
+                  if (todo.completed === true) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                }).length
+              }
+            />
           </section>
-        </Route>
-        <Route exact path="/completed">
+        </Route> */}
+        {/* <Route exact path="/completed">
           <section className="todoapp">
             <header className="header">
               <h1>todos</h1>
               <input
                 type="text"
-                value={newInput}
+                value={state.newInput}
                 className="new-todo"
                 placeholder="What needs to be done?"
                 autoFocus
                 onChange={(event) => handleChange(event)}
               />
             </header>
-            {/* <TodoList
+            <TodoList
               todos={todos.filter((todo) => {
                 if (todo.completed === true) {
                   return true;
@@ -135,21 +127,21 @@ function CreateTodo() {
                 }
               })}
             /> */}
-            {/* <Footer
-                clearComplete={clearComplete}
-                itemsLeft={
-                  state.todos.filter((todo) => {
-                    if (todo.completed === true) {
-                      return false;
-                    } else {
-                      return true;
-                    }
-                  }).length
-                }
-              /> */}
+        {/* <Footer
+              clearComplete={clearComplete}
+              itemsLeft={
+                state.todos.filter((todo) => {
+                  if (todo.completed === true) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                }).length
+              }
+            />
           </section>
-        </Route>
-      </Switch>
+        </Route> */}
+      </TodosContext.Provider>
     </>
   );
 }

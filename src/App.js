@@ -4,8 +4,7 @@ import Home from "./views/home";
 import createTodo from "./createTodo/createTodo";
 
 function App() {
-
-  return <div className="App">I'm changing this to say hi</div>;
+  // return <div className="App">I'm changing this to say hi</div>;
 
   return (
     <div className="App">
@@ -15,7 +14,6 @@ function App() {
       </Switch>
     </div>
   );
-
 }
 
 export default App;

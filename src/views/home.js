@@ -1,9 +1,9 @@
-import React from "react";
-import { useStore } from "../store/store";
+import React, { useStore } from "react";
+
 import Login from "../login/login";
 import Registration from "../registration/registration";
 
-function Home() {
+function Home(props) {
   const user = useStore((state) => state.user);
   return (
     <div className="home">

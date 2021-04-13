@@ -1,8 +1,7 @@
+import { createContext } from "react";
 import create from "zustand";
 import { devtools, redux } from "zustand/middleware";
 import todoList from "../todo.json";
-
-const initialState = { user: { token: "" }, todos: todoList };
 
 export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
@@ -13,7 +12,7 @@ export const UPDATE_INPUT = "UPDATE_INPUT";
 export const ADD_TODO = "ADD_TODO";
 export const CLEAR_COMPLETE = "CLEAR_COMPLETE";
 
-const reducer = (state, action) => {
+function reducer(state, action) {
   switch (action.type) {
     case LOGIN:
       return { user: action.payload };
@@ -28,8 +27,15 @@ const reducer = (state, action) => {
       };
     case ADD_TODO:
       return {
-        ...state,
-        todos: action.payload,
+        newInput: "",
+        todos: [
+          ...state.todos,
+          {
+            title: action.payload,
+            id: Date.now(),
+            completed: false,
+          },
+        ],
       };
     case TOGGLE_COMPLETE:
       return {
@@ -68,6 +74,6 @@ const reducer = (state, action) => {
     default:
       return state;
   }
-};
+}
 
-export const useStore = create(devtools(redux(reducer, initialState)));
+export default reducer;
