@@ -2,7 +2,7 @@ import create from "zustand";
 import { devtools, redux } from "zustand/middleware";
 import todoList from "../todo.json";
 
-const initialState = { user: { token: "" }, todoList: [] };
+const initialState = { user: JSON.parse(localStorage.getItem("user")) || { token: "" }, todos: [] };
 
 export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
