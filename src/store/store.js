@@ -34,17 +34,18 @@ const reducer = (state, action) => {
     //     ...state,
     //     todos: action.payload,
     //   };
-    // case TOGGLE_COMPLETE:
-    //   return {
-    //     ...state,
-    //     todos: state.todos.map((todo) => {
-    //       let newTodo = { ...todo };
-    //       if (newTodo.id === action.payload) {
-    //         newTodo.completed = !newTodo.completed;
-    //       }
-    //       return newTodo;
-    //     }),
-    //   };
+    case TOGGLE_COMPLETE:
+      return {
+        ...state,
+        todos: (state.completed = !state.completed),
+        // state.todos.map((todos) => {
+        // let newTodo = { ...todo };
+        // if (todos.id === action.payload) {
+        // todos.completed = !todos.completed;
+        // }
+        // return todos;
+        // }),
+      };
     // case DELETE_TODO:
     //   return {
     //     ...state,

@@ -1,20 +1,25 @@
-import React, { useEffect } from "react";
-import { getMyTodos } from "../fetch/fetch";
-import { GET_TODOLIST, useStore } from "../store/store";
+import React, { useEffect, useState } from "react";
+import { getMyTodos, toggleComplete } from "../fetch/fetch";
+import { GET_TODOLIST, TOGGLE_COMPLETE, useStore } from "../store/store";
 import TodoItem from "../todoItem/todoItem";
 
 function TodoList(props) {
   const user = useStore((state) => state.user);
   const dispatch = useStore((state) => state.dispatch);
   const store = useStore();
-  // let test = user.user.tasks.map((ele) => ele.title);
-  // console.log(test);
-  // console.log(user.user.tasks);
+  const [todoList, setTodoList] = useState([]);
+
+  function toggleCompleted(event, id) {
+    toggleComplete(user.token, id).then((data) => console.log(data));
+  }
+
   useEffect(() => {
-    getMyTodos(user.token).then((potatoes) => {
-      dispatch({ type: GET_TODOLIST, payload: potatoes });
-    });
-  }, [dispatch, store.user.todos]);
+    setTodoList(
+      getMyTodos(user.token).then((potatoes) => {
+        dispatch({ type: GET_TODOLIST, payload: potatoes });
+      })
+    );
+  }, []);
 
   return (
     <section className="main">
@@ -29,7 +34,7 @@ function TodoList(props) {
               dueDate={props.dueDate}
               createdAt={props.createdAt}
               category={props.category}
-              id={props.id}
+              _id={props._id}
             />
           ))}
         <TodoItem />

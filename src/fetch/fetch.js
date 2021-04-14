@@ -89,14 +89,13 @@ export const postMyTodos = (token, title, details, dueDate, category) => {
 };
 
 export const toggleComplete = (token, id) => {
-  return fetch(baseURL + "/tasks/update/completion/:id", {
+  return fetch(baseURL + `/tasks/update/completion/${id}`, {
     method: "PATCH",
     headers: {
       Authorization: `${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(id),
-  }).then((res) => res.json());
+  }).then((res) => console.log(res));
 };
 
 export const patchTodoInfo = (token, id, title, details, dueDate) => {
@@ -116,12 +115,11 @@ export const patchTodoInfo = (token, id, title, details, dueDate) => {
 };
 
 export const deleteTodo = (token, id) => {
-  return fetch(baseURL + "/tasks/delete/:id", {
+  return fetch(baseURL + `/tasks/delete/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(id),
   }).then((res) => res.json());
 };
