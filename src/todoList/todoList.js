@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useImperativeHandle, useState } from "react";
 import { getMyTodos, toggleComplete } from "../fetch/fetch";
 import { GET_TODOLIST, TOGGLE_COMPLETE, useStore } from "../store/store";
 import TodoItem from "../todoItem/todoItem";
 
 function TodoList(props) {
-  const user = useStore((state) => state.user);
-  const dispatch = useStore((state) => state.dispatch);
-  const store = useStore();
+  // const user = useStore((state) => state.user);
+  // const dispatch = useStore((state) => state.dispatch);
+  // const store = useStore();
+  const [dontMatter, setDontMatter] = useState(0);
   const [todoList, setTodoList] = useState([]);
-
-  function toggleCompleted(event, id) {
-    toggleComplete(user.token, id).then((data) => console.log(data));
-  }
-
+  const token = window.localStorage.user.slice(10, -2);
+  // console.log(window.localStorage.user.slice(10, -2));
   useEffect(() => {
-    setTodoList(
-      getMyTodos(user.token).then((potatoes) => {
-        dispatch({ type: GET_TODOLIST, payload: potatoes });
-      })
-    );
-  }, []);
+    const something = async () => {
+      const todos = await getMyTodos(token)
+        .then((data) => setTodoList(data))
+        .catch((err) => console.log(err));
+    };
+    something();
+    console.log(todoList);
+  }, [dontMatter]);
 
   return (
     <section className="main">
       <h3>Todo List</h3>
       <ul className="todo-list">
-        {store.todos &&
-          store.todos.map((props) => (
+        {todoList &&
+          todoList.map((props) => (
             <TodoItem
+              updateMatter={setDontMatter}
               title={props.title}
               details={props.details}
               completed={props.completed}

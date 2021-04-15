@@ -13,6 +13,7 @@ export const UPDATE_INPUT = "UPDATE_INPUT";
 export const ADD_TODO = "ADD_TODO";
 export const CLEAR_COMPLETE = "CLEAR_COMPLETE";
 export const GET_TODOLIST = "GET_TODOLIST";
+export const GET_TODO = "GET_TODO";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -24,6 +25,8 @@ const reducer = (state, action) => {
       return { user: {} };
     case GET_TODOLIST:
       return { ...state, todos: action.payload };
+    case GET_TODO:
+      return { ...state, todo: action.payload };
     // case UPDATE_INPUT:
     //   return {
     //     ...state,
@@ -37,7 +40,7 @@ const reducer = (state, action) => {
     case TOGGLE_COMPLETE:
       return {
         ...state,
-        todos: (state.completed = !state.completed),
+        completed: (state.completed = !state.completed),
         // state.todos.map((todos) => {
         // let newTodo = { ...todo };
         // if (todos.id === action.payload) {
