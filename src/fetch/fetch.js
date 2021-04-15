@@ -121,5 +121,5 @@ export const deleteTodo = (token, id) => {
       Authorization: `${token}`,
       "Content-Type": "application/json",
     },
-  }).then((res) => res.json());
+  });
 };

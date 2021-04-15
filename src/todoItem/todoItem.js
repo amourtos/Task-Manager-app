@@ -6,10 +6,10 @@ import { deleteTodo, toggleComplete, getMyTodos, getTodo } from "../fetch/fetch"
 import ActionButton from "antd/lib/modal/ActionButton";
 
 function TodoItem(props) {
-  // const dispatch = useStore((state) => state.dispatch);
   const user = useStore((state) => state.user);
-  // const store = useStore();
   const [todo, setTodo] = useState({});
+  // const dispatch = useStore((state) => state.dispatch);
+  // const store = useStore();
 
   const toggleCompleted = async () => {
     await toggleComplete(user.token, props._id);
@@ -19,10 +19,19 @@ function TodoItem(props) {
     props.updateMatter(Math.random());
   };
 
+  const deleteTodoFunction = async () => {
+    let newTodo = await deleteTodo(user.token, props._id);
+    // const newTodo = await getTodo(user.token, props._id);
+    setTodo(newTodo);
+    console.log(newTodo);
+    props.updateMatter(Math.random());
+  };
+
   useEffect(() => {
     const someBullShit = async () => {
-      const newTodo = await getTodo(user.token, props._id);
-      setTodo(newTodo);
+      const updatedTodo = await getTodo(user.token, props._id).catch((err) => console.log(err));
+      console.log(updatedTodo);
+      setTodo(updatedTodo);
     };
     someBullShit();
   }, []);
@@ -40,7 +49,7 @@ function TodoItem(props) {
             Toggle Complete
           </Button>
 
-          <Button type="primary" shape="circle">
+          <Button type="primary" shape="circle" onClick={deleteTodoFunction}>
             Delete
           </Button>
         </Card>
