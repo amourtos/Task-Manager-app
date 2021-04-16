@@ -26,6 +26,16 @@ export const createUser = async (username, email, password) => {
   }
 };
 
+export const getTodo = (token, todoId) => {
+  return fetch(baseURL + `/tasks/${todoId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `${token}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json());
+};
+
 export const getUsers = () => {
   return fetch(baseURL + "/users/allusers").then((res) => res.json());
 };
@@ -34,7 +44,7 @@ export const deleteUser = (token, id) => {
   return fetch(baseURL + "/users/delete/:id", {
     method: "DELETE",
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: `${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ id }),
@@ -45,7 +55,7 @@ export const updateUser = (token, id, newUserInfo) => {
   return fetch(baseURL + "/users/update/:id", {
     method: "PATCH",
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: `${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newUserInfo),
@@ -56,7 +66,7 @@ export const getMyTodos = (token) => {
   return fetch(baseURL + "/tasks/mytasks", {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: `${token}`,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json());
@@ -66,7 +76,7 @@ export const postMyTodos = (token, title, details, dueDate, category) => {
   return fetch(baseURL + "/tasks/mytasks", {
     method: "POST",
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: `${token}`,
       "content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -78,22 +88,21 @@ export const postMyTodos = (token, title, details, dueDate, category) => {
   }).then((res) => res.json());
 };
 
-export const toggleComplete = (token, id, title, details, dueDate) => {
-  return fetch(baseURL + "/tasks/update/completion/:id", {
+export const toggleComplete = (token, id) => {
+  return fetch(baseURL + `/tasks/update/completion/${id}`, {
     method: "PATCH",
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: `${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(id),
-  }).then((res) => res.json());
+  }).then((res) => console.log(res));
 };
 
 export const patchTodoInfo = (token, id, title, details, dueDate) => {
   return fetch(baseURL + "/tasks/update/task/:id", {
     method: "PATCH",
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: `${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -106,12 +115,11 @@ export const patchTodoInfo = (token, id, title, details, dueDate) => {
 };
 
 export const deleteTodo = (token, id) => {
-  return fetch(baseURL + "/tasks/delete/:id", {
+  return fetch(baseURL + `/tasks/delete/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: `${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(id),
-  }).then((res) => res.json());
+  });
 };

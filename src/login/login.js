@@ -44,7 +44,7 @@ function Login(props) {
         <label htmlFor="password">Password-</label>
         <input type="password" name="password" value={formData.password} required onChange={handleChange} />
         <button id="LoginButton" type="submit">
-          <Link to="/main">Login</Link>
+          Login
         </button>
         <div>{user.message ? user.message : ""}</div>
       </form>
