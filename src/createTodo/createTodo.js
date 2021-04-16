@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import TodoList from "../todoList/todoList";
-import todosList from "../todo.json";
-import {
-  useStore,
-  TOGGLE_COMPLETE,
-  DELETE_TODO,
-  UPDATE_INPUT,
-  ADD_TODO,
-  CLEAR_COMPLETE,
-} from "../store/store";
+import { useStore, UPDATE_INPUT, ADD_TODO } from "../store/store";
 
 function CreateTodo() {
   const dispatch = useStore((state) => state.dispatch);
@@ -38,10 +30,6 @@ function CreateTodo() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
-
-  function clearComplete(event) {
-    dispatch({ type: CLEAR_COMPLETE });
-  }
 
   return (
     <>
