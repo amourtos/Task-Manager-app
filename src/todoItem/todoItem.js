@@ -24,11 +24,11 @@ function TodoItem(props) {
   };
 
   useEffect(() => {
-    const someBullShit = async () => {
+    const someStuff = async () => {
       const updatedTodo = await getTodo(user.token, props._id).catch((err) => console.log(err));
       setTodo(updatedTodo);
     };
-    someBullShit();
+    someStuff();
   }, [user]);
 
   return (
