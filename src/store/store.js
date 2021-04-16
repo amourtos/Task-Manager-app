@@ -2,7 +2,10 @@ import create from "zustand";
 import { devtools, redux } from "zustand/middleware";
 import todoList from "../todo.json";
 
-const initialState = { user: { token: "" }, todoList: [] };
+const initialState = {
+  user: JSON.parse(localStorage.getItem("user")) || { token: "" },
+  todos: [],
+};
 
 export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
@@ -14,7 +17,7 @@ export const ADD_TODO = "ADD_TODO";
 export const CLEAR_COMPLETE = "CLEAR_COMPLETE";
 export const GET_TODOLIST = "GET_TODOLIST";
 
-const reducer = (state, action) => {
+function reducer(state, action) {
   switch (action.type) {
     case LOGIN:
       return { user: action.payload };
@@ -24,16 +27,23 @@ const reducer = (state, action) => {
       return { user: {} };
     case GET_TODOLIST:
       return { ...state, todos: action.payload };
-    // case UPDATE_INPUT:
-    //   return {
-    //     ...state,
-    //     newInput: action.payload,
-    //   };
-    // case ADD_TODO:
-    //   return {
-    //     ...state,
-    //     todos: action.payload,
-    //   };
+    case UPDATE_INPUT:
+      return {
+        ...state,
+        newInput: action.payload,
+      };
+    case ADD_TODO:
+      return {
+        newInput: "",
+        todos: [
+          ...state.todos,
+          {
+            title: action.payload,
+            id: Date.now(),
+            completed: false,
+          },
+        ],
+      };
     // case TOGGLE_COMPLETE:
     //   return {
     //     ...state,
@@ -71,6 +81,8 @@ const reducer = (state, action) => {
     default:
       return state;
   }
-};
+}
 
-export const useStore = create(devtools(redux(reducer, initialState)), { name: "storage" });
+export const useStore = create(devtools(redux(reducer, initialState)), {
+  name: "storage",
+});

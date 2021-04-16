@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, createContext, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import TodoList from "../todoList/todoList";
 import todosList from "../todo.json";
+import reducer from "../store/store.js";
 import {
   useStore,
   TOGGLE_COMPLETE,
@@ -20,13 +21,14 @@ function CreateTodo() {
   function handleChange(event) {
     let inputTitle = event.target.title;
     let inputValue = event.target.value;
-    setNewInput((state) => ({ ...state, [inputTitle]: inputValue }));
+    setTodos((state) => ({ ...state, [inputTitle]: inputValue }));
     setNewInput(event.target.value);
     dispatch({ type: UPDATE_INPUT, payload: event.target.value });
   }
 
   function handleKeyDown(event) {
     if (event.key === "Enter") {
+      event.preventDefault();
       setTodos(newInput);
       dispatch({ type: ADD_TODO, payload: todos });
     }

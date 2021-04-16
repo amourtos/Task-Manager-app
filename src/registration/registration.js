@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useStore } from "react";
 import { Form, Input, Button } from "antd";
-import { useStore } from "../store/store";
+
 import { createUser } from "../fetch/fetch";
 import Popup from "./Popup";
 
@@ -31,15 +31,24 @@ function Registration(props) {
 
   return (
     <div className="RegisterForm">
-      <Form className="RegisterForm" onSubmit={(e) => e.preventDefault()} onFinish={handleSubmit}>
+      <Form
+        className="RegisterForm"
+        onSubmit={(e) => e.preventDefault()}
+        onFinish={handleSubmit}
+      >
         <Form.Item
           label="Username"
           rules={[
             {
               required: true,
             },
-          ]}>
-          <Input name={"username"} value={userData.username} onChange={handleChange} />
+          ]}
+        >
+          <Input
+            name={"username"}
+            value={userData.username}
+            onChange={handleChange}
+          />
         </Form.Item>
         <Form.Item
           label="Email"
@@ -47,11 +56,23 @@ function Registration(props) {
             {
               type: "email",
             },
-          ]}>
-          <Input name={"email"} value={userData.email} onChange={handleChange} />
+          ]}
+        >
+          <Input
+            name={"email"}
+            value={userData.email}
+            onChange={handleChange}
+          />
         </Form.Item>
-        <Form.Item label="Password" rules={[{ required: true, message: "Please input your password!" }]}>
-          <Input.Password name={"password"} value={userData.password} onChange={handleChange} />
+        <Form.Item
+          label="Password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input.Password
+            name={"password"}
+            value={userData.password}
+            onChange={handleChange}
+          />
         </Form.Item>
         <Form.Item>
           <Button id="SubmitButton" type="primary" htmlType="submit">

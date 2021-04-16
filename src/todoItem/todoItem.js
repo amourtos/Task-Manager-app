@@ -1,17 +1,28 @@
 import React from "react";
-import todoList from "../todo.json";
+import { Card, Menu, Button, Tooltip } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+
+import { useStore } from "../store/store";
 
 function TodoItem(props) {
+  const user = useStore((state) => state.user);
   return (
-    <ul className="List">
-      <div className="todoItem">
-        <h2>Todo List</h2>
-        <ul>{todoList[0].title}</ul>
-        <ul>{todoList[1].title}</ul>
-        <ul>{todoList[2].title}</ul>
-        <ul>{todoList[3].title}</ul>
-      </div>
-    </ul>
+    <div className="todoItem">
+      <li>
+        <Card title={<h3>{props.title}</h3>} style={{ width: 300 }}>
+          <p>details: {props.details}</p>
+          <p>createdAt: {props.createdAt}</p>
+          <p>dueDate: {props.dueDate}</p>
+          <p>completed: {props.completed === true ? "completed" : "Not"}</p>
+          <Button type="primary" shape="circle">
+            Toggle Complete
+          </Button>
+          <Button type="primary" shape="circle">
+            Delete
+          </Button>
+        </Card>
+      </li>
+    </div>
   );
 }
 
