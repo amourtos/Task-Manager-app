@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { loginRequest } from "../fetch/fetch";
 import { useStore, LOGIN } from "../store/store";
+import { Form, Button } from "react-bootstrap";
 
 function Login(props) {
   const dispatch = useStore((state) => state.dispatch);
@@ -37,19 +38,47 @@ function Login(props) {
   };
 
   return (
-    <div className="LoginForm">
-      <form id="login-form" onSubmit={handleLogin}>
-        <label htmlFor="username">Email-</label>
-        <input type="text" name="email" value={formData.email} autoFocus required onChange={handleChange} />
-        <label htmlFor="password">Password-</label>
-        <input type="password" name="password" value={formData.password} required onChange={handleChange} />
-        <button id="LoginButton" type="submit">
-          Login
-        </button>
+    <>
+      <Form onSubmit={handleLogin}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Username</Form.Label>
+          <Form.Control name="email" type="text" placeholder="email" value={formData.email} required onChange={handleChange} />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={formData.password}
+            required
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+        <br></br>
         <div>{user.message ? user.message : ""}</div>
-      </form>
-    </div>
+      </Form>
+    </>
   );
 }
+// <div className="LoginForm">
+//   <form id="login-form" onSubmit={handleLogin}>
+//     <label htmlFor="username">Email-</label>
+//     <input type="text" name="email" value={formData.email} autoFocus required onChange={handleChange} />
+//     <label htmlFor="password">Password-</label>
+//     <input type="password" name="password" value={formData.password} required onChange={handleChange} />
+//     <button id="LoginButton" type="submit">
+//       Login
+//     </button>
+//     <div>{user.message ? user.message : ""}</div>
+//   </form>
+// </div>
+//   );
+// }
 
 export default Login;
