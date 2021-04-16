@@ -12,8 +12,6 @@ const reducer = (state, action) => {
   switch (action.type) {
     case LOGIN:
       return { user: action.payload };
-    case REGISTER:
-      return {};
 
     // case UPDATE_INPUT:
     //   return {
