@@ -57,7 +57,7 @@ function Login(props) {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="info" type="submit">
           Submit
         </Button>
         <br></br>

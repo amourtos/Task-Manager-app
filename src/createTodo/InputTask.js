@@ -3,8 +3,9 @@ import { useStore } from "../store/store";
 import { Form, Button } from "react-bootstrap";
 import { getMyTodos, postMyTodos } from "../fetch/fetch";
 
-function InputTask() {
+function InputTask(props) {
   const user = useStore((state) => state.user);
+  const [newTodo, setNewTodo] = useState({});
   const [taskData, setTaskData] = useState({
     title: "",
     details: "",
@@ -13,14 +14,10 @@ function InputTask() {
   });
 
   const handleSubmit = async (e) => {
-    await postMyTodos(
-      user.token,
-      taskData.title,
-      taskData.details,
-      taskData.dueDate,
-      taskData.category
-    ).then((data) => console.log(data));
-    await getMyTodos(user.token);
+    await postMyTodos(user.token, taskData.title, taskData.details, taskData.dueDate, taskData.category).then((data) =>
+      console.log(data.tasks[data.tasks.length - 1]._id)
+    );
+    await props.updateMatter(Math.random());
   };
 
   const handleChange = (e) => {
@@ -48,14 +45,7 @@ function InputTask() {
 
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label>Details of Todo: </Form.Label>
-          <Form.Control
-            name="details"
-            as="textarea"
-            rows={3}
-            onChange={handleChange}
-            value={taskData.details}
-            required
-          />
+          <Form.Control name="details" as="textarea" rows={3} onChange={handleChange} value={taskData.details} required />
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">
@@ -72,12 +62,7 @@ function InputTask() {
 
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Category</Form.Label>
-          <Form.Control
-            name="category"
-            as="select"
-            value={taskData.category}
-            onChange={handleChange}
-          >
+          <Form.Control name="category" as="select" value={taskData.category} onChange={handleChange}>
             <option>Please Select A Category</option>
             <option>Fitness</option>
             <option>School</option>

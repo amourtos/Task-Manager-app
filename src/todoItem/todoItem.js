@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "../store/store";
-import {
-  deleteTodo,
-  toggleComplete,
-  getMyTodos,
-  getTodo,
-} from "../fetch/fetch";
+import { deleteTodo, toggleComplete, getMyTodos, getTodo } from "../fetch/fetch";
 import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 
 function TodoItem(props) {
@@ -30,9 +25,7 @@ function TodoItem(props) {
 
   useEffect(() => {
     const someStuff = async () => {
-      const updatedTodo = await getTodo(user.token, props._id).catch((err) =>
-        console.log(err)
-      );
+      const updatedTodo = await getTodo(user.token, props._id).catch((err) => console.log(err));
       setTodo(updatedTodo);
     };
     someStuff();
@@ -50,14 +43,10 @@ function TodoItem(props) {
           </Card.Header>
           <Card.Body>
             <Card.Title>{todo.title}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
-              Due By: {todo.dueDate}
-            </Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted">Due By: {todo.dueDate}</Card.Subtitle>
 
             <Card.Text>{todo.details}</Card.Text>
-            <Card.Subtitle className="mb-2 text-muted">
-              {todo.completed === true ? "completed" : ""}
-            </Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted">{todo.completed === true ? "completed" : ""}</Card.Subtitle>
             {todo.completed === true ? (
               <Button variant="Dark" onClick={toggleCompleted}>
                 OOPS! This isn't finished.
@@ -67,11 +56,7 @@ function TodoItem(props) {
                 Click to Complete
               </Button>
             )}
-            {/* <Button variant="success" onClick={toggleCompleted}>
-              {todo.completed === true
-                ? "Remove completed status"
-                : "Click to Complete"}
-            </Button> */}
+
             <Button variant="danger" onClick={deleteTodoFunction}>
               Delete
             </Button>
