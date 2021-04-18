@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Button } from "react-bootstrap";
 const Logout = () => {
   function handleLogout() {
     window.localStorage.removeItem("user");
@@ -9,7 +9,9 @@ const Logout = () => {
 
   return (
     <div>
-      <button onClick={handleLogout}>LOGOUT</button>
+      <Button variant="info" onClick={handleLogout}>
+        LOGOUT
+      </Button>
     </div>
   );
 };

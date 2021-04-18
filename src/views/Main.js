@@ -1,6 +1,6 @@
-import userEvent from "@testing-library/user-event";
 import React from "react";
 import CreateTodo from "../createTodo/createTodo";
+import InputTask from "../createTodo/InputTask";
 import Logout from "../logout/Logout";
 import { useStore } from "../store/store";
 import TodoList from "../todoList/todoList";
@@ -11,6 +11,7 @@ const Main = () => {
   return (
     <div>
       <Home />
+      {user.token ? <InputTask /> : null}
       {user.token ? <Logout /> : null}
       {user.token ? <CreateTodo /> : null}
       {user.token ? <TodoList /> : null}
