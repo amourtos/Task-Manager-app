@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "../store/store";
-import { deleteTodo, toggleComplete, getMyTodos, getTodo } from "../fetch/fetch";
-import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
+import { deleteTodo, toggleComplete, getTodo } from "../fetch/fetch";
+import { Card, Button } from "react-bootstrap";
 
 function TodoItem(props) {
   const user = useStore((state) => state.user);

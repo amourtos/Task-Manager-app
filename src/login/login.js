@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { loginRequest } from "../fetch/fetch";
 import { useStore, LOGIN } from "../store/store";
 import { Form, Button } from "react-bootstrap";

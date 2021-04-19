@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { getMyTodos } from "../fetch/fetch";
 import { useStore } from "../store/store";
 import TodoItem from "../todoItem/todoItem";
-import { Button } from "react-bootstrap";
 import InputTask from "../createTodo/InputTask";
 
 function TodoList(props) {
