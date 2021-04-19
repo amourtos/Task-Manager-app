@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { loginRequest } from "../fetch/fetch";
 import { useStore, LOGIN } from "../store/store";
 import { Form, Button } from "react-bootstrap";
@@ -19,17 +18,6 @@ function Login(props) {
       window.localStorage.setItem("user", JSON.stringify(userData));
     });
   };
-
-  const handleMessage = (e) => {
-    console.log(e);
-  };
-
-  useEffect(() => {
-    window.addEventListener("message", handleMessage);
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, []);
 
   const handleChange = (e) => {
     const inputName = e.target.name;
@@ -57,7 +45,7 @@ function Login(props) {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="info" type="submit">
           Submit
         </Button>
         <br></br>

@@ -72,8 +72,9 @@ export const getMyTodos = (token) => {
   }).then((res) => res.json());
 };
 
-export const postMyTodos = (token, title, details, dueDate, category) => {
-  return fetch(baseURL + "/tasks/mytasks", {
+export const postMyTodos = async (token, title, details, dueDate, category, user) => {
+  console.log(token, title, details, dueDate, category, user);
+  const res = await fetch(baseURL + "/tasks/mytasks", {
     method: "POST",
     headers: {
       Authorization: `${token}`,
@@ -84,8 +85,10 @@ export const postMyTodos = (token, title, details, dueDate, category) => {
       details,
       dueDate,
       category,
+      user,
     }),
   }).then((res) => res.json());
+  return res;
 };
 
 export const toggleComplete = (token, id) => {

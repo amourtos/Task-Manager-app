@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "../store/store";
-import { deleteTodo, toggleComplete, getMyTodos, getTodo } from "../fetch/fetch";
+import { deleteTodo, toggleComplete, getTodo } from "../fetch/fetch";
 import { Card, Button } from "react-bootstrap";
 
 function TodoItem(props) {
@@ -12,6 +12,7 @@ function TodoItem(props) {
     const newTodo = await getTodo(user.token, props._id);
     setTodo(newTodo);
     console.log(todo);
+    props.something();
     // props.updateMatter(Math.random());
   };
 
@@ -19,8 +20,9 @@ function TodoItem(props) {
     await deleteTodo(user.token, props._id);
     const newTodo = await getTodo(user.token, props._id);
     setTodo(newTodo);
-    await getMyTodos(user.token).then((data) => console.log(data));
-    props.updateMatter(Math.random());
+    props.something();
+    // await getMyTodos(user.token).then((data) => console.log(data));
+    // props.updateMatter(Math.random());
   };
 
   useEffect(() => {
@@ -36,16 +38,27 @@ function TodoItem(props) {
       {todo === null ? (
         <div></div>
       ) : (
-        <Card style={{ width: "27rem" }}>
+        <Card bg="dark" border="success" style={{ width: "27rem" }}>
+          <Card.Header border="success">
+            {" "}
+            <Card.Title>Category: {todo.category}</Card.Title>
+          </Card.Header>
           <Card.Body>
             <Card.Title>{todo.title}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">Due By: {todo.dueDate}</Card.Subtitle>
-            <Card.Subtitle className="mb-2 text-muted">Created On: {todo.createdAt}</Card.Subtitle>
+
             <Card.Text>{todo.details}</Card.Text>
-            <Card.Subtitle className="mb-2 text-muted">{todo.completed === true ? "completed" : "Not Completed"}</Card.Subtitle>
-            <Button variant="primary" onClick={toggleCompleted}>
-              Click to Complete
-            </Button>
+            <Card.Subtitle className="mb-2 text-muted">{todo.completed === true ? "completed" : ""}</Card.Subtitle>
+            {todo.completed === true ? (
+              <Button variant="Dark" onClick={toggleCompleted}>
+                OOPS! This isn't finished.
+              </Button>
+            ) : (
+              <Button variant="success" onClick={toggleCompleted}>
+                Click to Complete
+              </Button>
+            )}
+
             <Button variant="danger" onClick={deleteTodoFunction}>
               Delete
             </Button>
