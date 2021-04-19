@@ -20,17 +20,6 @@ function Login(props) {
     });
   };
 
-  const handleMessage = (e) => {
-    console.log(e);
-  };
-
-  useEffect(() => {
-    window.addEventListener("message", handleMessage);
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, []);
-
   const handleChange = (e) => {
     const inputName = e.target.name;
     const inputValue = e.target.value;

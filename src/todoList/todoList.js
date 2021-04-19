@@ -11,23 +11,24 @@ function TodoList(props) {
   const [dontMatter, setDontMatter] = useState(0);
   const [todoList, setTodoList] = useState([]);
 
+  const something = async () => {
+    const todos = await getMyTodos(user.token);
+    setTodoList(todos);
+    console.log(todos);
+  };
   useEffect(() => {
-    const something = async () => {
-      const todos = await getMyTodos(user.token)
-        .then((data) => setTodoList(data))
-        .catch((err) => console.log(err));
-    };
     something();
   }, [dontMatter]);
 
   return (
     <section className="main">
-      {user.token ? <InputTask updateMatter={setDontMatter} /> : null}
+      {user.token ? <InputTask something={something} updateMatter={setDontMatter} /> : null}
 
       <h3>Todo List</h3>
       <ul className="todo-list">
         {todoList.map((props) => (
           <TodoItem
+            something={something}
             key={props._id}
             updateMatter={setDontMatter}
             title={props.title}

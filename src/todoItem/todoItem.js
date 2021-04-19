@@ -12,6 +12,7 @@ function TodoItem(props) {
     const newTodo = await getTodo(user.token, props._id);
     setTodo(newTodo);
     console.log(todo);
+    props.something();
     // props.updateMatter(Math.random());
   };
 
@@ -19,8 +20,9 @@ function TodoItem(props) {
     await deleteTodo(user.token, props._id);
     const newTodo = await getTodo(user.token, props._id);
     setTodo(newTodo);
-    await getMyTodos(user.token).then((data) => console.log(data));
-    props.updateMatter(Math.random());
+    props.something();
+    // await getMyTodos(user.token).then((data) => console.log(data));
+    // props.updateMatter(Math.random());
   };
 
   useEffect(() => {

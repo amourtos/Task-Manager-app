@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useStore } from "../store/store";
 import { Form, Button } from "react-bootstrap";
-import { getMyTodos, postMyTodos } from "../fetch/fetch";
+import { postMyTodos } from "../fetch/fetch";
 
 function InputTask(props) {
   const user = useStore((state) => state.user);
-  const [newTodo, setNewTodo] = useState({});
   const [taskData, setTaskData] = useState({
     title: "",
     details: "",
@@ -13,11 +12,10 @@ function InputTask(props) {
     category: "",
   });
 
-  const handleSubmit = async (e) => {
-    await postMyTodos(user.token, taskData.title, taskData.details, taskData.dueDate, taskData.category).then((data) =>
-      console.log(data.tasks[data.tasks.length - 1]._id)
-    );
-    await props.updateMatter(Math.random());
+  const handleSubmit = (e) => {
+    postMyTodos(user.token, taskData.title, taskData.details, taskData.dueDate, taskData.category, user.id);
+    props.updateMatter(Math.random());
+    props.something();
   };
 
   const handleChange = (e) => {
