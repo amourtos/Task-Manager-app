@@ -1,6 +1,4 @@
 import React from "react";
-import CreateTodo from "../createTodo/createTodo";
-import InputTask from "../createTodo/InputTask";
 import Logout from "../logout/Logout";
 import Navbar from "../Navbar/Navbar";
 import { useStore } from "../store/store";
@@ -13,7 +11,6 @@ const Main = () => {
     <div>
       <Home />
       {user.token ? <Logout /> : null}
-      {user.token ? <CreateTodo /> : null}
       {user.token ? <TodoList /> : null}
       {user.token ? <Navbar /> : null}
     </div>
