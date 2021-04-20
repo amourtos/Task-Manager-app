@@ -29,7 +29,7 @@ function TodoItem(props) {
 
   const countDown = (date) => {
     let days = moment().countdown(date, countdown.DAYS, 1).toString();
-    if (days[3] === "h") {
+    if (days[3] === "h" || days[2] === "h") {
       days = "Today";
     }
     return days;
