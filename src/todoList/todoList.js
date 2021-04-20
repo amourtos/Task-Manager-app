@@ -21,8 +21,8 @@ function TodoList(props) {
   return (
     <section className="main">
       {user.token ? <InputTask something={something} updateMatter={setDontMatter} /> : null}
-
       <h3>Todo List</h3>
+
       <ul className="todo-list">
         {todoList.map((props) => (
           <TodoItem
