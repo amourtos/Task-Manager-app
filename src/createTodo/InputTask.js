@@ -25,10 +25,14 @@ function InputTask(props) {
   };
 
   return (
-    <div>
+    <div class="container h-100">
       <h1>Create your To Do that You Can Do</h1>
 
-      <Form onSubmit={handleSubmit}>
+      <Form
+        onSubmit={handleSubmit}
+        style={{ width: "69rem" }}
+        class="container"
+        class="h-100 w-100 justify-content-center align-items-center">
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>Title: </Form.Label>
           <Form.Control
@@ -54,13 +58,14 @@ function InputTask(props) {
             placeholder="enter due date"
             onChange={handleChange}
             value={taskData.dueDate}
+            class="w-50"
             required
           />
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Category</Form.Label>
-          <Form.Control name="category" as="select" value={taskData.category} onChange={handleChange}>
+          <Form.Control class="w-50" name="category" as="select" value={taskData.category} onChange={handleChange}>
             <option>Please Select A Category</option>
             <option>Fitness</option>
             <option>School</option>
