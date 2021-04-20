@@ -3,12 +3,47 @@ import { getMyTodos } from "../fetch/fetch";
 import { useStore } from "../store/store";
 import TodoItem from "../todoItem/todoItem";
 import InputTask from "../createTodo/InputTask";
-
+import { Button, ButtonGroup } from "react-bootstrap";
 function TodoList(props) {
   const user = useStore((state) => state.user);
   const [dontMatter, setDontMatter] = useState(0);
   const [todoList, setTodoList] = useState([]);
-
+  const filterWork = () => {
+    getMyTodos(user.token).then((data) => {
+      let result = data.filter((ele) => ele.category === "Work");
+      setTodoList(result);
+    });
+  };
+  const filterChores = () => {
+    getMyTodos(user.token).then((data) => {
+      let result = data.filter((ele) => ele.category === "Chores");
+      setTodoList(result);
+    });
+  };
+  const filterFitness = () => {
+    getMyTodos(user.token).then((data) => {
+      let result = data.filter((ele) => ele.category === "Fitness");
+      setTodoList(result);
+    });
+  };
+  const filterMisc = () => {
+    getMyTodos(user.token).then((data) => {
+      let result = data.filter((ele) => ele.category === "Misc");
+      setTodoList(result);
+    });
+  };
+  const filterSchool = () => {
+    getMyTodos(user.token).then((data) => {
+      let result = data.filter((ele) => ele.category === "School");
+      setTodoList(result);
+    });
+  };
+  const filterCompleted = () => {
+    getMyTodos(user.token).then((data) => {
+      let result = data.filter((ele) => ele.completed === true);
+      setTodoList(result);
+    });
+  };
   const something = async () => {
     const todos = await getMyTodos(user.token);
     setTodoList(todos);
@@ -17,30 +52,54 @@ function TodoList(props) {
   useEffect(() => {
     something();
   }, [dontMatter]);
-
   return (
-    <section className="main">
-      {user.token ? <InputTask something={something} updateMatter={setDontMatter} /> : null}
-      <h3>Todo List</h3>
-
-      <ul className="todo-list">
-        {todoList.map((props) => (
-          <TodoItem
-            something={something}
-            key={props._id}
-            updateMatter={setDontMatter}
-            title={props.title}
-            details={props.details}
-            completed={props.completed}
-            dueDate={props.dueDate}
-            createdAt={props.createdAt}
-            category={props.category}
-            _id={props._id}
-          />
-        ))}
-      </ul>
-    </section>
+    <div>
+      <section className="main">
+        {user.token ? (
+          <InputTask something={something} updateMatter={setDontMatter} />
+        ) : null}
+        <h3>Todo List</h3>
+        <ButtonGroup size="lg" className="mb-2">
+          <Button variant="info" onClick={filterFitness}>
+            Fitness
+          </Button>
+          <Button variant="info" onClick={filterSchool}>
+            School
+          </Button>
+          <Button variant="info" onClick={filterWork}>
+            Work
+          </Button>
+          <Button variant="info" onClick={filterChores}>
+            Chores
+          </Button>
+          <Button variant="info" onClick={filterMisc}>
+            Misc
+          </Button>
+          <Button variant="info" onClick={something}>
+            All
+          </Button>
+          <Button variant="info" onClick={filterCompleted}>
+            Complete
+          </Button>
+        </ButtonGroup>
+        <ul className="todo-list">
+          {todoList.map((props) => (
+            <TodoItem
+              something={something}
+              key={props._id}
+              updateMatter={setDontMatter}
+              title={props.title}
+              details={props.details}
+              completed={props.completed}
+              dueDate={props.dueDate}
+              createdAt={props.createdAt}
+              category={props.category}
+              _id={props._id}
+            />
+          ))}
+        </ul>
+      </section>
+    </div>
   );
 }
-
 export default TodoList;
