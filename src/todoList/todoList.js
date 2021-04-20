@@ -3,6 +3,7 @@ import { getMyTodos } from "../fetch/fetch";
 import { useStore } from "../store/store";
 import TodoItem from "../todoItem/todoItem";
 import InputTask from "../createTodo/InputTask";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 
 function TodoList(props) {
   const user = useStore((state) => state.user);
@@ -20,8 +21,15 @@ function TodoList(props) {
 
   return (
     <section className="main">
-      {user.token ? <InputTask something={something} updateMatter={setDontMatter} /> : null}
+      {user.token ? (
+        <InputTask something={something} updateMatter={setDontMatter} />
+      ) : null}
       <h3>Todo List</h3>
+      <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+      </DropdownButton>
       <ul className="todo-list">
         {todoList.map((props) => (
           <TodoItem
