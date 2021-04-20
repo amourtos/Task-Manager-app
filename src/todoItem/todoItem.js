@@ -29,14 +29,15 @@ function TodoItem(props) {
 
   const countDown = (date) => {
     let days = moment().countdown(date, countdown.DAYS, 1).toString();
+    if (days[3] === "h") {
+      days = "Today";
+    }
     return days;
   };
 
   useEffect(() => {
     const someStuff = async () => {
-      const updatedTodo = await getTodo(user.token, props._id).catch((err) =>
-        console.log(err)
-      );
+      const updatedTodo = await getTodo(user.token, props._id).catch((err) => console.log(err));
       setTodo(updatedTodo);
     };
     someStuff();
@@ -48,29 +49,22 @@ function TodoItem(props) {
         <div></div>
       ) : (
         <div class="row h-100 justify-content-center align-items-center">
-          <Card bg="dark" border="success" style={{ width: "32rem" }}>
+          <Card bg="dark" border="success" style={{ width: "45rem" }}>
             <Card.Header border="success">
               {" "}
               <Card.Title>Category: {todo.category}</Card.Title>
             </Card.Header>
             <Card.Body>
               <Card.Title>{todo.title}</Card.Title>
-              {console.log(countDown(todo.dueDate)[3])}
 
               <Card.Subtitle
                 className="mb-2 text"
-                style={
-                  countDown(todo.dueDate)[3] === "h"
-                    ? { color: "red" }
-                    : { color: "lightgreen" }
-                }
-              >
-                Due in: {countDown(todo.dueDate)}
+                style={countDown(todo.dueDate) === "Today" ? { color: "red" } : { color: "lightgreen" }}>
+                Due: {countDown(todo.dueDate)}
               </Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">{moment(todo.dueDate).format("MMM Do, YY")}</Card.Subtitle>
               <Card.Text>{todo.details}</Card.Text>
-              <Card.Subtitle className="mb-2 text-muted">
-                {todo.completed === true ? "completed" : ""}
-              </Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">{todo.completed === true ? "completed" : ""}</Card.Subtitle>
               {todo.completed === true ? (
                 <Button variant="Dark" onClick={toggleCompleted}>
                   OOPS! This isn't finished.

@@ -30,7 +30,7 @@ function InputTask(props) {
 
       <Form
         onSubmit={handleSubmit}
-        style={{ width: "39rem" }}
+        style={{ width: "69rem" }}
         class="container"
         class="h-100 w-100 justify-content-center align-items-center">
         <Form.Group controlId="exampleForm.ControlInput1">
