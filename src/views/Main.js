@@ -1,5 +1,5 @@
 import React from "react";
-import Logout from "../components/logout/Logout";
+import Logout from "../components/logout/logout";
 import { useStore } from "../store/store";
 import TodoList from "../components/todoList/todoList";
 import Home from "./home";
