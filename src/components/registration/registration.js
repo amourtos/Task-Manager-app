@@ -46,7 +46,14 @@ function Registration(props) {
 
         <Form.Group controlId="formBasicEmail">
           <Form.Label>email</Form.Label>
-          <Form.Control name="email" type="email" placeholder="Enter Email" onChange={handleChange} value={userData.email} required />
+          <Form.Control
+            name="email"
+            type="email"
+            placeholder="Enter Email"
+            onChange={handleChange}
+            value={userData.email}
+            required
+          />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
@@ -61,7 +68,7 @@ function Registration(props) {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="info" type="submit">
           Submit
         </Button>
       </Form>

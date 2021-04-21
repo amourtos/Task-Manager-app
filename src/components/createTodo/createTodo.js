@@ -13,7 +13,14 @@ function CreateTodo(props) {
   });
 
   const handleSubmit = (e) => {
-    postMyTodos(user.token, taskData.title, taskData.details, taskData.dueDate, taskData.category, user.id);
+    postMyTodos(
+      user.token,
+      taskData.title,
+      taskData.details,
+      taskData.dueDate,
+      taskData.category,
+      user.id
+    );
     props.updateMatter(Math.random());
     props.something();
   };
@@ -32,7 +39,8 @@ function CreateTodo(props) {
         onSubmit={handleSubmit}
         style={{ width: "69rem" }}
         class="container"
-        class="h-100 w-100 justify-content-center align-items-center">
+        class="h-100 w-100 justify-content-center align-items-center"
+      >
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>Title: </Form.Label>
           <Form.Control
@@ -47,7 +55,14 @@ function CreateTodo(props) {
 
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label>Details of Todo: </Form.Label>
-          <Form.Control name="details" as="textarea" rows={3} onChange={handleChange} value={taskData.details} required />
+          <Form.Control
+            name="details"
+            as="textarea"
+            rows={3}
+            onChange={handleChange}
+            value={taskData.details}
+            required
+          />
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">
@@ -65,7 +80,13 @@ function CreateTodo(props) {
 
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Category</Form.Label>
-          <Form.Control class="w-50" name="category" as="select" value={taskData.category} onChange={handleChange}>
+          <Form.Control
+            class="w-50"
+            name="category"
+            as="select"
+            value={taskData.category}
+            onChange={handleChange}
+          >
             <option>Please Select A Category</option>
             <option>Fitness</option>
             <option>School</option>
@@ -75,7 +96,7 @@ function CreateTodo(props) {
           </Form.Control>
         </Form.Group>
 
-        <Button variant="success" onClick={handleSubmit}>
+        <Button variant="info" onClick={handleSubmit}>
           Submit Todo
         </Button>
       </Form>
