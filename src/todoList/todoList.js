@@ -4,6 +4,7 @@ import { useStore } from "../store/store";
 import TodoItem from "../todoItem/todoItem";
 import InputTask from "../createTodo/InputTask";
 import { Button, ButtonGroup } from "react-bootstrap";
+
 import Calendar from "react-calendar";
 import moment from "moment";
 import "react-calendar/dist/Calendar.css";
@@ -25,6 +26,7 @@ function TodoList(props) {
   };
 
   //FILTER FUNCTIONS BY CATEGORY --------------------------------------------
+=======
   const filterWork = () => {
     getMyTodos(user.token).then((data) => {
       let result = data.filter((ele) => ele.category === "Work");
@@ -67,6 +69,7 @@ function TodoList(props) {
       setTodoList(result);
     });
   };
+
   const something = async () => {
     const todos = await getMyTodos(user.token);
     setTodoList(todos);
@@ -76,7 +79,6 @@ function TodoList(props) {
   useEffect(() => {
     something();
   }, [dontMatter]);
-
   return (
     <div>
       <section className="main">
@@ -87,6 +89,7 @@ function TodoList(props) {
         <br></br>
         {user.token ? <Calendar class="calendar" onChange={onChange} value={calDate} /> : null}
         <br></br>
+
         <ButtonGroup size="lg" className="mb-2">
           <Button variant="info" onClick={filterFitness}>
             Fitness
@@ -133,5 +136,4 @@ function TodoList(props) {
     </div>
   );
 }
-
 export default TodoList;
