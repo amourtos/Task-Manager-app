@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getMyTodos } from "../fetch/fetch";
-import { useStore } from "../store/store";
+import { getMyTodos } from "../../fetch/fetch";
+import { useStore } from "../../store/store";
 import TodoItem from "../todoItem/todoItem";
-import InputTask from "../components/createTodo/InputTask";
+import InputTask from "../createTodo/InputTask";
 
 function TodoList(props) {
   const user = useStore((state) => state.user);
@@ -20,9 +20,7 @@ function TodoList(props) {
 
   return (
     <section className="main">
-      {user.token ? (
-        <InputTask something={something} updateMatter={setDontMatter} />
-      ) : null}
+      {user.token ? <InputTask something={something} updateMatter={setDontMatter} /> : null}
       <h3>Todo List</h3>
 
       <ul className="todo-list">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useStore } from "../store/store";
-import { deleteTodo, toggleComplete, getTodo } from "../fetch/fetch";
+import { useStore } from "../../store/store";
+import { deleteTodo, toggleComplete, getTodo } from "../../fetch/fetch";
 import { Card, Button } from "react-bootstrap";
 import moment from "moment";
 import countdown from "moment-countdown";
