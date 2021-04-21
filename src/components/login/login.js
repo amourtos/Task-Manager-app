@@ -46,7 +46,7 @@ function Login(props) {
         </Form.Group>
 
         <Button variant="info" type="submit">
-          Login
+          LOGIN
         </Button>
         <br></br>
         <div>{user.message ? user.message : ""}</div>
