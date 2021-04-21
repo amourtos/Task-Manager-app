@@ -1,18 +1,16 @@
 import React from "react";
-import Logout from "../logout/Logout";
-import Navbar from "../Navbar/Navbar";
+import Logout from "../components/logout/logout";
 import { useStore } from "../store/store";
-import TodoList from "../todoList/todoList";
+import TodoList from "../components/todoList/todoList";
 import Home from "./home";
 
 const Main = () => {
   const user = useStore((state) => state.user);
   return (
-    <div>
+    <div class="main-page">
       <Home />
-      {user.token ? <Logout /> : null}
       {user.token ? <TodoList /> : null}
-      {user.token ? <Navbar /> : null}
+      {user.token ? <Logout /> : null}
     </div>
   );
 };

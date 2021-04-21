@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useStore } from "../store/store";
-import { deleteTodo, toggleComplete, getTodo } from "../fetch/fetch";
+import { useStore } from "../../store/store";
+import { deleteTodo, toggleComplete, getTodo } from "../../fetch/fetch";
 import { Card, Button } from "react-bootstrap";
 import moment from "moment";
 import countdown from "moment-countdown";
@@ -32,6 +32,15 @@ function TodoItem(props) {
     if (days[3] === "h" || days[2] === "h") {
       days = "Today";
     }
+    let countstart = moment().countdown(date, countdown.DAYS, 1).start;
+    let countend = moment().countdown(date, countdown.DAYS, 1).end;
+
+    let countstartFormat = moment(countstart).format("MMDD");
+    let countendFormat = moment(countend).format("MMDD");
+
+    if (Math.sign(countstartFormat - countendFormat) === 1) {
+      days = "Past Due";
+    }
     return days;
   };
 
@@ -59,10 +68,14 @@ function TodoItem(props) {
 
               <Card.Subtitle
                 className="mb-2 text"
-                style={countDown(todo.dueDate) === "Today" ? { color: "red" } : { color: "lightgreen" }}>
+                style={
+                  countDown(todo.dueDate) === "Today" || countDown(todo.dueDate) === "Past Due"
+                    ? { color: "red" }
+                    : { color: "lightgreen" }
+                }>
                 Due: {countDown(todo.dueDate)}
               </Card.Subtitle>
-              <Card.Subtitle className="mb-2 text-muted">{moment(todo.dueDate).format("MMM Do, YY")}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">Due by: {moment(todo.dueDate).format("MMM Do, YY")}</Card.Subtitle>
               <Card.Text>{todo.details}</Card.Text>
               <Card.Subtitle className="mb-2 text-muted">{todo.completed === true ? "completed" : ""}</Card.Subtitle>
               {todo.completed === true ? (
