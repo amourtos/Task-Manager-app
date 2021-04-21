@@ -3,7 +3,7 @@ import { useStore } from "../../store/store";
 import { Form, Button } from "react-bootstrap";
 import { postMyTodos } from "../../fetch/fetch";
 
-function InputTask(props) {
+function CreateTodo(props) {
   const user = useStore((state) => state.user);
   const [taskData, setTaskData] = useState({
     title: "",
@@ -83,4 +83,4 @@ function InputTask(props) {
   );
 }
 
-export default InputTask;
+export default CreateTodo;

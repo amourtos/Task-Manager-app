@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { createUser } from "../../fetch/fetch";
-import Popup from "./Popup";
+import Popup from "./popup.js";
 
 function Registration(props) {
   const [buttonPopup, setButtonPopup] = useState(false);

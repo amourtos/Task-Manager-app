@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getMyTodos } from "../../fetch/fetch";
 import { useStore } from "../../store/store";
 import TodoItem from "../todoItem/todoItem";
-import InputTask from "../createTodo/InputTask";
+import CreateTodo from "../createTodo/createTodo";
 import { Button, ButtonGroup } from "react-bootstrap";
 
 import Calendar from "react-calendar";
@@ -81,7 +81,7 @@ function TodoList(props) {
   return (
     <div>
       <section className="main">
-        {user.token ? <InputTask something={something} updateMatter={setDontMatter} /> : null}
+        {user.token ? <CreateTodo something={something} updateMatter={setDontMatter} /> : null}
         <br></br>
         <br></br>
         <h3>Todo List</h3>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Popup.css";
+import "./popup.css";
 
 const Popup = (props) => {
   return props.trigger ? (
