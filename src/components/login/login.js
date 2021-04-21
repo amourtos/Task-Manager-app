@@ -54,19 +54,5 @@ function Login(props) {
     </>
   );
 }
-// <div className="LoginForm">
-//   <form id="login-form" onSubmit={handleLogin}>
-//     <label htmlFor="username">Email-</label>
-//     <input type="text" name="email" value={formData.email} autoFocus required onChange={handleChange} />
-//     <label htmlFor="password">Password-</label>
-//     <input type="password" name="password" value={formData.password} required onChange={handleChange} />
-//     <button id="LoginButton" type="submit">
-//       Login
-//     </button>
-//     <div>{user.message ? user.message : ""}</div>
-//   </form>
-// </div>
-//   );
-// }
 
 export default Login;
