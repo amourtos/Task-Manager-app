@@ -1,7 +1,7 @@
 import React from "react";
-import Logout from "../logout/Logout";
+import Logout from "../components/logout/Logout";
 import { useStore } from "../store/store";
-import TodoList from "../todoList/todoList";
+import TodoList from "../components/todoList/todoList";
 import Home from "./home";
 
 const Main = () => {

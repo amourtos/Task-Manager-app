@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getMyTodos } from "../../fetch/fetch";
 import { useStore } from "../../store/store";
-import TodoItem from "../../todoItem/todoItem";
+import TodoItem from "../todoItem/todoItem";
 import InputTask from "../createTodo/InputTask";
 import { Button, ButtonGroup } from "react-bootstrap";
 
