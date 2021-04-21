@@ -62,7 +62,7 @@ function TodoItem(props) {
                 style={countDown(todo.dueDate) === "Today" ? { color: "red" } : { color: "lightgreen" }}>
                 Due: {countDown(todo.dueDate)}
               </Card.Subtitle>
-              <Card.Subtitle className="mb-2 text-muted">{moment(todo.dueDate).format("MMM Do, YY")}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">Due by: {moment(todo.dueDate).format("MMM Do, YY")}</Card.Subtitle>
               <Card.Text>{todo.details}</Card.Text>
               <Card.Subtitle className="mb-2 text-muted">{todo.completed === true ? "completed" : ""}</Card.Subtitle>
               {todo.completed === true ? (
