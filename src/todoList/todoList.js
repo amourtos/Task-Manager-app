@@ -61,6 +61,12 @@ function TodoList(props) {
       setTodoList(result);
     });
   };
+  const filterNotCompleted = () => {
+    getMyTodos(user.token).then((data) => {
+      let result = data.filter((ele) => ele.completed === false);
+      setTodoList(result);
+    });
+  };
   const something = async () => {
     const todos = await getMyTodos(user.token);
     setTodoList(todos);
@@ -102,6 +108,9 @@ function TodoList(props) {
           </Button>
           <Button variant="info" onClick={filterCompleted}>
             Completed
+          </Button>
+          <Button variant="info" onClick={filterNotCompleted}>
+            Not Completed
           </Button>
         </ButtonGroup>
         <ul className="todo-list">
