@@ -29,8 +29,15 @@ function Login(props) {
     <>
       <Form onSubmit={handleLogin}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Username</Form.Label>
-          <Form.Control name="email" type="text" placeholder="email" value={formData.email} required onChange={handleChange} />
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            name="email"
+            type="text"
+            placeholder="email"
+            value={formData.email}
+            required
+            onChange={handleChange}
+          />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
