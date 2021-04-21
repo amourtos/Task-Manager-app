@@ -26,7 +26,6 @@ function TodoList(props) {
   };
 
   //FILTER FUNCTIONS BY CATEGORY --------------------------------------------
-=======
   const filterWork = () => {
     getMyTodos(user.token).then((data) => {
       let result = data.filter((ele) => ele.category === "Work");
