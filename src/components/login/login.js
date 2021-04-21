@@ -30,14 +30,7 @@ function Login(props) {
       <Form onSubmit={handleLogin}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
-          <Form.Control
-            name="email"
-            type="text"
-            placeholder="email"
-            value={formData.email}
-            required
-            onChange={handleChange}
-          />
+          <Form.Control name="email" type="text" placeholder="email" value={formData.email} required onChange={handleChange} />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
@@ -53,7 +46,7 @@ function Login(props) {
         </Form.Group>
 
         <Button variant="info" type="submit">
-          Submit
+          Login
         </Button>
         <br></br>
         <div>{user.message ? user.message : ""}</div>
