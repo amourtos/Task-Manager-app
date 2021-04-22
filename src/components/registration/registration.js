@@ -71,35 +71,3 @@ function Registration(props) {
 }
 
 export default Registration;
-
-// <div className="RegisterForm">
-//   <form className="RegisterForm" onSubmit={(e) => e.preventDefault()} onFinish={handleSubmit}>
-//     <Form.Item
-//       label="Username"
-//       rules={[
-//         {
-//           required: true,
-//         },
-//       ]}>
-//       <Input name={"username"} value={userData.username} onChange={handleChange} />
-//     </Form.Item>
-//     <Form.Item
-//       label="Email"
-//       rules={[
-//         {
-//           type: "email",
-//         },
-//       ]}>
-//       <Input name={"email"} value={userData.email} onChange={handleChange} />
-//     </Form.Item>
-//     <Form.Item label="Password" rules={[{ required: true, message: "Please input your password!" }]}>
-//       <Input.Password name={"password"} value={userData.password} onChange={handleChange} />
-//     </Form.Item>
-//     <Form.Item>
-//       <Button id="SubmitButton" type="primary" htmlType="submit">
-//         Submit
-//       </Button>
-//     </Form.Item>
-//   </form>
-//   <Popup trigger={buttonPopup} setTrigger={setButtonPopup} />
-// </div>
