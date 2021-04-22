@@ -99,20 +99,3 @@ function TodoItem(props) {
 }
 
 export default TodoItem;
-
-{
-  /* <Card title={<h3>{todo.title}</h3>} style={{ width: 300 }}>
-  <p>details: {todo.details}</p>
-  <p>createdAt: {todo.createdAt}</p>
-  <p>dueDate: {todo.dueDate}</p>
-  <p>completed: {todo.completed === true ? "completed" : "Not Completed"}</p>
-
-  <Button type="primary" shape="circle" onClick={toggleCompleted}>
-    Toggle Complete
-  </Button>
-
-  <Button type="primary" shape="circle" onClick={deleteTodoFunction}>
-    Delete
-  </Button>
-</Card> */
-}
