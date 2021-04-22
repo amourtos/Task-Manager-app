@@ -1,4 +1,5 @@
-export const baseURL = "http://localhost:3000";
+// export const baseURL = "http://localhost:3000";
+export const baseURL = "https://sleepy-wave-gazelle.glitch.me";
 
 export const loginRequest = (email, password) => {
   return fetch(baseURL + "/users/login", {
