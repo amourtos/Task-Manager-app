@@ -18,7 +18,7 @@ function TodoList(props) {
 
   const onChange = (calDate) => {
     setCalDate(calDate);
-    console.log(moment(calDate).format("MMM Do, YYYY"));
+    // console.log(moment(calDate).format("MMM Do, YYYY"));
     getMyTodos(user.token).then((data) => {
       let result = data.filter((ele) => moment(ele.dueDate).format("MMM, Do, YYYY") === moment(calDate).format("MMM, Do, YYYY"));
       setTodoList(result);

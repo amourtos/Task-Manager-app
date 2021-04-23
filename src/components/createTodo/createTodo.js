@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useStore } from "../../store/store";
 import { Form, Button } from "react-bootstrap";
 import { postMyTodos } from "../../fetch/fetch";
+import moment from "moment";
 
 function CreateTodo(props) {
   const user = useStore((state) => state.user);
@@ -13,13 +14,10 @@ function CreateTodo(props) {
   });
 
   const handleSubmit = (e) => {
-    postMyTodos(
-      user.token,
-      taskData.title,
-      taskData.details,
-      taskData.dueDate,
-      taskData.category,
-      user.id
+    let dateObject = new Date(taskData.dueDate);
+    dateObject.setHours(40);
+    postMyTodos(user.token, taskData.title, taskData.details, dateObject, taskData.category, user.id).then((data) =>
+      console.log(data)
     );
     props.updateMatter(Math.random());
     props.something();
@@ -39,8 +37,7 @@ function CreateTodo(props) {
         onSubmit={handleSubmit}
         style={{ width: "69rem" }}
         class="container"
-        class="h-100 w-100 justify-content-center align-items-center"
-      >
+        class="h-100 w-100 justify-content-center align-items-center">
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>Title: </Form.Label>
           <Form.Control
@@ -55,14 +52,7 @@ function CreateTodo(props) {
 
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label>Details of Todo: </Form.Label>
-          <Form.Control
-            name="details"
-            as="textarea"
-            rows={3}
-            onChange={handleChange}
-            value={taskData.details}
-            required
-          />
+          <Form.Control name="details" as="textarea" rows={3} onChange={handleChange} value={taskData.details} required />
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">
@@ -80,13 +70,7 @@ function CreateTodo(props) {
 
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Category</Form.Label>
-          <Form.Control
-            class="w-50"
-            name="category"
-            as="select"
-            value={taskData.category}
-            onChange={handleChange}
-          >
+          <Form.Control class="w-50" name="category" as="select" value={taskData.category} onChange={handleChange}>
             <option>Please Select A Category</option>
             <option>Fitness</option>
             <option>School</option>

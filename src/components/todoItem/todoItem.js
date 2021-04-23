@@ -13,7 +13,7 @@ function TodoItem(props) {
     await toggleComplete(user.token, props._id);
     const newTodo = await getTodo(user.token, props._id);
     setTodo(newTodo);
-    console.log(todo);
+    // console.log(todo);
     props.something();
     // props.updateMatter(Math.random());
   };
@@ -23,25 +23,30 @@ function TodoItem(props) {
     const newTodo = await getTodo(user.token, props._id);
     setTodo(newTodo);
     props.something();
+
     // await getMyTodos(user.token).then((data) => console.log(data));
     // props.updateMatter(Math.random());
   };
 
-  const countDown = (date) => {
-    let days = moment().countdown(date, countdown.DAYS, 1).toString();
-    if (days[3] === "h" || days[2] === "h") {
-      days = "Today";
-    }
+  const counter = (date) => {
+    let day = moment().countdown(date, countdown.DAYS, 1).toString();
+
     let countstart = moment().countdown(date, countdown.DAYS, 1).start;
     let countend = moment().countdown(date, countdown.DAYS, 1).end;
 
     let countstartFormat = moment(countstart).format("MMDD");
     let countendFormat = moment(countend).format("MMDD");
-
-    if (Math.sign(countstartFormat - countendFormat) === 1) {
-      days = "Past Due";
+    if (Math.sign(+(countstartFormat - countendFormat)) === 1) {
+      day = "Past Due";
     }
-    return days;
+    if (day[3] === "h" || day[2] === "h") {
+      day = "Today";
+    }
+    // if (day[0] === "2" && day[2] === "d") {
+    //   day = "Tomorrow";
+    // }
+
+    return day;
   };
 
   useEffect(() => {
@@ -65,15 +70,15 @@ function TodoItem(props) {
             </Card.Header>
             <Card.Body>
               <Card.Title>{todo.title}</Card.Title>
-
               <Card.Subtitle
                 className="mb-2 text"
                 style={
-                  countDown(todo.dueDate) === "Today" || countDown(todo.dueDate) === "Past Due"
+                  counter(todo.dueDate) === "Today" || counter(todo.dueDate) === "Past Due"
                     ? { color: "red" }
                     : { color: "lightgreen" }
                 }>
-                Due: {countDown(todo.dueDate)}
+                Due: {counter(todo.dueDate)}
+                <br></br>
               </Card.Subtitle>
               <Card.Subtitle className="mb-2 text-muted">Due by: {moment(todo.dueDate).format("MMM Do, YY")}</Card.Subtitle>
               <Card.Text>{todo.details}</Card.Text>
